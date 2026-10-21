@@ -70,4 +70,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). In short: each model is one small profil
 - [CyberoniOntoni/dreame-TP20-integration](https://github.com/CyberoniOntoni/dreame-TP20-integration): the PM10 and TP20 property maps, and the TP20 hazards.
 - [osmnnl/dreame-pm20](https://github.com/osmnnl/dreame-pm20) (MIT): the PM20 property map.
 
-No code was copied from projects without a license; only the factual property and command numbers were used, with thanks.
+No code was copied from projects without a license; only the factual property and command numbers were used, with thanks. License notices for the MIT projects are in [NOTICE](NOTICE).
