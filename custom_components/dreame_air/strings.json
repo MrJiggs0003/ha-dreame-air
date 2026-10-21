@@ -1,0 +1,216 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Sign in to Dreamehome",
+        "description": "Use the email and password of your Dreamehome account. The integration works through Dreame's cloud, so it needs internet access.\n\n**Sign in to Dreamehome with Google or Apple?** Those can't be used here. Add a password to your account first: in the Dreamehome app, open **Profile → Settings → Account and Security** and set a password. Then enter your account's email and that password. Your Google or Apple sign-in keeps working in the app.",
+        "data": {
+          "username": "Email",
+          "password": "Password",
+          "region": "Region"
+        },
+        "data_description": {
+          "region": "The region your Dreamehome account was created in."
+        }
+      },
+      "device": {
+        "title": "Choose a purifier",
+        "data": {
+          "did": "Purifier"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Sign in again",
+        "description": "Dreame rejected the saved password for {username}. Enter the current one.",
+        "data": {
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Dreame rejected the email or password. Check the region too. If you sign in to the app with Google or Apple, set a password in Dreamehome under Profile → Settings → Account and Security and use that. After several failed attempts Dreame may block sign-in for about an hour.",
+      "cannot_connect": "Couldn't reach Dreame's cloud. Try again in a moment."
+    },
+    "abort": {
+      "already_configured": "This purifier is already set up.",
+      "no_devices": "No air purifiers that aren't already set up were found on this account.",
+      "reauth_successful": "Signed in again."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Dreame Air options",
+        "data": {
+          "off_behavior": "What \"off\" does",
+          "scan_interval": "Update interval"
+        },
+        "data_description": {
+          "off_behavior": "Soft off switches to the quietest setting and keeps the purifier reachable. Real off powers it down. Some purifiers can't be turned back on remotely afterward: on the FP10, trying knocked it offline until it was reset and re-paired, so the FP10 doesn't offer real off.",
+          "scan_interval": "How often to read the purifier. Shorter intervals mean more requests to Dreame's cloud."
+        }
+      }
+    }
+  },
+  "selector": {
+    "region": {
+      "options": {
+        "us": "Americas",
+        "eu": "Europe",
+        "sg": "Asia-Pacific",
+        "ru": "Russia",
+        "kr": "South Korea",
+        "cn": "Mainland China"
+      }
+    },
+    "off_behavior": {
+      "options": {
+        "soft": "Soft off: switch to the quietest setting, stay reachable",
+        "real": "Real off: power down (may need the purifier's button to turn back on)"
+      }
+    }
+  },
+  "entity": {
+    "fan": {
+      "purifier": {
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "smart": "Smart",
+              "strong": "Strong",
+              "sleep": "Sleep",
+              "comfort": "Comfort",
+              "customize": "Customize",
+              "pet": "Pet"
+            }
+          }
+        }
+      }
+    },
+    "sensor": {
+      "pm25": {
+        "name": "PM2.5"
+      },
+      "pm10": {
+        "name": "PM10"
+      },
+      "pm1": {
+        "name": "PM1"
+      },
+      "tvoc": {
+        "name": "TVOC"
+      },
+      "hcho": {
+        "name": "Formaldehyde"
+      },
+      "temperature": {
+        "name": "Temperature"
+      },
+      "humidity": {
+        "name": "Humidity"
+      },
+      "air_quality_level": {
+        "name": "Air quality",
+        "state": {
+          "excellent": "Excellent",
+          "good": "Good",
+          "moderate": "Moderate",
+          "poor": "Poor",
+          "bad": "Bad"
+        }
+      },
+      "filter_life": {
+        "name": "Filter life"
+      },
+      "filter_days_left": {
+        "name": "Filter days left"
+      },
+      "filter_hours_used": {
+        "name": "Filter hours used"
+      },
+      "hair_box_life": {
+        "name": "Hair collection box"
+      },
+      "carbon_filter_life": {
+        "name": "Carbon filter life"
+      },
+      "carbon_filter_days_left": {
+        "name": "Carbon filter days left"
+      },
+      "carbon_filter_hours_used": {
+        "name": "Carbon filter hours used"
+      },
+      "mode": {
+        "name": "Mode",
+        "state": {
+          "smart": "Smart",
+          "comfort": "Comfort",
+          "customize": "Customize",
+          "pet": "Pet"
+        }
+      },
+      "fan_speed": {
+        "name": "Fan speed"
+      },
+      "off_timer": {
+        "name": "Off timer"
+      }
+    },
+    "binary_sensor": {
+      "filter_replacement": {
+        "name": "Filter replacement needed"
+      }
+    },
+    "button": {
+      "reset_filter": {
+        "name": "Reset filter"
+      },
+      "reset_carbon_filter": {
+        "name": "Reset carbon filter"
+      }
+    },
+    "light": {
+      "display": {
+        "name": "Display",
+        "state_attributes": {
+          "effect": {
+            "state": {
+              "steady": "Steady",
+              "breathing": "Breathing"
+            }
+          }
+        }
+      }
+    },
+    "switch": {
+      "key_tone": {
+        "name": "Key beep"
+      },
+      "child_lock": {
+        "name": "Child lock"
+      }
+    },
+    "number": {
+      "off_timer": {
+        "name": "Off timer"
+      }
+    },
+    "select": {
+      "light_color": {
+        "name": "Light color",
+        "state": {
+          "off": "Off",
+          "blue": "Blue",
+          "orange": "Orange",
+          "green": "Green"
+        }
+      }
+    }
+  },
+  "issues": {
+    "unsupported_model": {
+      "title": "{name} isn't supported yet",
+      "description": "Dreame Air doesn't have a profile for the model {model} yet, so it hasn't created any entities. Sending commands meant for other models can crash some purifiers, so it won't guess.\n\nTo help add support, open an issue on the Dreame Air GitHub page and attach this entry's diagnostics."
+    }
+  }
+}

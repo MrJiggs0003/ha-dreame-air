@@ -1,0 +1,14 @@
+{
+  "domain": "dreame_air",
+  "name": "Dreame Air",
+  "codeowners": ["@MrJiggs0003"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/MrJiggs0003/ha-dreame-air",
+  "integration_type": "device",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/MrJiggs0003/ha-dreame-air/issues",
+  "loggers": ["custom_components.dreame_air"],
+  "requirements": [],
+  "version": "0.1.0"
+}
