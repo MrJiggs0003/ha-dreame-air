@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Sign-in and setup help
+    url: https://github.com/MrJiggs0003/ha-dreame-air#troubleshooting
+    about: Google or Apple accounts, offline purifiers and other common problems.
+  - name: Report a security problem
+    url: https://github.com/MrJiggs0003/ha-dreame-air/security/advisories/new
+    about: Please report security problems privately, not as an issue.

@@ -28,6 +28,10 @@ That's also why unknown models get a notice instead of entities: guessing isn't 
 
 ## Installation
 
+[![Open your Home Assistant instance and open this repository in HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=MrJiggs0003&repository=ha-dreame-air&category=integration)
+
+Or add it by hand:
+
 1. In HACS, open the ⋮ menu → **Custom repositories**, add this repository's URL, and choose **Integration**.
 2. Search for **Dreame Air**, download it, and restart Home Assistant.
 3. Go to **Settings → Devices & services → Add integration → Dreame Air**.
@@ -59,9 +63,84 @@ Fully powering a purifier down from Home Assistant is risky. On a real FP10, pow
 - **What "off" does:** soft off (default) or real off, on models where real off is offered.
 - **Update interval:** 15 to 300 seconds (default 30). Changes you make take effect immediately in Home Assistant; the cloud catches up within a few seconds.
 
+## Entities
+
+Each purifier is one device. Entity IDs follow the device's name, so a purifier named "Bedroom Air Purifier" gets `fan.bedroom_air_purifier`, `sensor.bedroom_air_purifier_pm2_5` and so on. A model only gets the entities its profile supports (see the table above).
+
+| Type | Entities |
+|---|---|
+| Fan | The purifier: on/off, speed as a percentage, and its modes as presets (for the FP10: `smart`, `sleep`, `customize`, `pet`) |
+| Sensor | PM2.5, PM10, PM1, TVOC, formaldehyde, temperature, humidity, air quality, filter life, filter days left, filter hours used, hair collection box, carbon filter life/days/hours. Sensors-only models also get mode, fan speed and off timer |
+| Binary sensor | Filter replacement needed |
+| Light | Display: brightness, plus `steady` and `breathing` effects where supported |
+| Switch | Key beep, child lock |
+| Number | Off timer, in hours (0 = no timer) |
+| Select | Light color (AP10) |
+| Button | Reset filter, reset carbon filter |
+
+## Example automations
+
+Quiet the purifier at night and turn its display off:
+
+```yaml
+automation:
+  - alias: Bedroom purifier - night
+    triggers:
+      - trigger: time
+        at: "22:30:00"
+    actions:
+      - action: fan.set_preset_mode
+        target:
+          entity_id: fan.bedroom_air_purifier
+        data:
+          preset_mode: sleep
+      - action: light.turn_off
+        target:
+          entity_id: light.bedroom_air_purifier_display
+```
+
+Get a notification when the filter needs replacing:
+
+```yaml
+automation:
+  - alias: Bedroom purifier - filter
+    triggers:
+      - trigger: state
+        entity_id: binary_sensor.bedroom_air_purifier_filter_replacement_needed
+        to: "on"
+    actions:
+      - action: notify.notify
+        data:
+          message: The bedroom air purifier's filter needs replacing.
+```
+
+## Troubleshooting
+
+- **"Dreame rejected the email or password":** check the region. With a Google or Apple account, set a Dreamehome password first (see above).
+- **Sign-in suddenly fails everywhere:** after several failed attempts Dreame blocks sign-in for about an hour. Wait, then try once.
+- **Entities are unavailable:** check that the purifier works in the Dreamehome app. If the app can't reach it either, the problem is the purifier's Wi-Fi or Dreame's cloud, and Home Assistant recovers by itself once it's back.
+- **"The purifier is in standby and can't be turned on remotely":** it was switched off with its own button or the app. Turn it on there; on the FP10 and TP20 Home Assistant deliberately won't (see above).
+- **A sensor shows nothing after a reset or re-pair:** some purifiers report nothing for a sensor for up to about an hour afterwards.
+- **A reading doesn't match the app:** please [open a bug report](../../issues/new/choose) with both values.
+- **An "… isn't supported yet" repair notice:** see [Adding a model](#adding-a-model).
+
+To see what the integration is doing, add this to `configuration.yaml` and restart:
+
+```yaml
+logger:
+  logs:
+    custom_components.dreame_air: debug
+```
+
+When opening an issue, attach the diagnostics (Settings → Devices & services → Dreame Air → ⋮ → **Download diagnostics**). Your login, device ID and serial number are removed from them automatically.
+
 ## Adding a model
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). In short: each model is one small profile file, mapped carefully on a real unit.
+
+## Changes and security
+
+What changed in each version is in [CHANGELOG.md](CHANGELOG.md). Please report security problems privately, as described in [SECURITY.md](SECURITY.md).
 
 ## Credits
 

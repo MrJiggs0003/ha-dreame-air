@@ -1,0 +1,58 @@
+name: Support a new model
+description: Ask for a Dreame purifier that isn't supported yet, or report results for an untested one
+labels: [new model]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Each model needs its own profile, mapped from a real unit, because the wrong command can crash some purifiers.
+        You can help a lot without any coding. See [CONTRIBUTING.md](https://github.com/MrJiggs0003/ha-dreame-air/blob/main/CONTRIBUTING.md) for the details.
+        Please don't post your email, password, device ID or serial number.
+  - type: input
+    id: model_name
+    attributes:
+      label: Model name
+      description: As shown on the box or in the Dreamehome app, for example "Dreame FP10"
+    validations:
+      required: true
+  - type: input
+    id: model_id
+    attributes:
+      label: Model ID
+      description: Starts with `dreame.airp.`. It's in this integration's diagnostics, or the output of `tools/probe.py --list`.
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What is this?
+      options:
+        - A model that isn't supported yet
+        - Test results for an "Untested" model
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics
+      description: Settings → Devices & services → Dreame Air → ⋮ → **Download diagnostics**, then drag the file here.
+  - type: textarea
+    id: probe
+    attributes:
+      label: Probe readings (optional)
+      description: |
+        Output of `tools/probe.py`, with the Dreamehome app's value next to each reading where you know it.
+        Remove the device ID and serial number first.
+      render: text
+  - type: textarea
+    id: results
+    attributes:
+      label: What works and what doesn't
+      description: For an untested model, list each control and sensor you tried and what happened.
+  - type: checkboxes
+    id: careful
+    attributes:
+      label: Before you probe
+      options:
+        - label: I understand that reading some properties can make a purifier stop responding until it's restarted or re-paired.
+          required: true

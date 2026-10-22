@@ -1,0 +1,55 @@
+name: Bug report
+description: Something doesn't work on a supported purifier
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. If your purifier isn't in the supported list, use **Support a new model** instead.
+        Please don't post your email, password, device ID or serial number.
+  - type: dropdown
+    id: model
+    attributes:
+      label: Model
+      options: [FP10, AP10, PM10, TP20, AirPursue PM20]
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Dreame Air version
+      description: Shown in HACS, for example 0.1.1
+    validations:
+      required: true
+  - type: input
+    id: ha_version
+    attributes:
+      label: Home Assistant version
+      description: Settings → About
+    validations:
+      required: true
+  - type: textarea
+    id: what_happened
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: app
+    attributes:
+      label: What the Dreamehome app shows
+      description: For wrong readings, the value the app shows at the same time helps a lot.
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics
+      description: |
+        Settings → Devices & services → Dreame Air → ⋮ → **Download diagnostics**, then drag the file here.
+        Your login, device ID and serial number are removed from it automatically.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Any lines mentioning `dreame_air` from Settings → System → Logs.
+      render: text
