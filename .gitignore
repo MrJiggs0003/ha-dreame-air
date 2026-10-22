@@ -7,3 +7,7 @@ __pycache__/
 # scripts/develop's test Home Assistant
 config/*
 !config/configuration.yaml
+# Uploads dropped at the top level (screenshots to review) are never committed.
+/*.png
+/*.jpg
+/*.jpeg
