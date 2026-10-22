@@ -39,7 +39,7 @@ class DreameAirEntity(CoordinatorEntity[DreameAirCoordinator]):
             model=profile.name,
             model_id=profile.model,
             sw_version=str(data["firmware"]) if data.get("firmware") else None,
-            serial_number=str(data["serial"]) if data.get("serial") else None,
+            serial_number=_serial(data.get("serial")),
         )
 
     @property
@@ -62,6 +62,12 @@ class DreameAirEntity(CoordinatorEntity[DreameAirCoordinator]):
     @property
     def available(self) -> bool:
         return super().available and self._key in self.data
+
+
+def _serial(value: Any) -> str | None:
+    """The serial number, or None when the purifier reports only zeros (the FP10 does)."""
+    serial = str(value or "").strip()
+    return serial if serial.strip("0") else None
 
 
 def reports_value(coordinator: DreameAirCoordinator, key: str) -> bool:

@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.1.5
+
+- The device page no longer shows a serial number of all zeros, which some purifiers (the FP10) report instead of a real one.
+
 - README: a screenshot of the FP10 in Home Assistant.
 
 ## 0.1.4

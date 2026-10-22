@@ -17,7 +17,7 @@ from homeassistant.config_entries import ConfigEntryState
 from homeassistant.const import ATTR_ENTITY_ID, STATE_OFF, STATE_ON
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import HomeAssistantError
-from homeassistant.helpers import entity_registry as er, issue_registry as ir
+from homeassistant.helpers import device_registry as dr, entity_registry as er, issue_registry as ir
 import pytest
 
 from custom_components.dreame_air.api import AuthFailed
@@ -184,3 +184,14 @@ async def test_off_timer_in_minutes(hass: HomeAssistant, cloud: FakeCloud, entit
     state = hass.states.get(timer)
     assert state.attributes["unit_of_measurement"] == "min"
     assert float(state.state) == 120
+
+
+@pytest.mark.parametrize(("reported", "shown"), [("U2513TEST", "U2513TEST"), ("000000000000000000", None)])
+async def test_serial_number(
+    hass: HomeAssistant, cloud: FakeCloud, device_registry: dr.DeviceRegistry, reported: str, shown: str | None
+) -> None:
+    """Some purifiers report a serial of all zeros; that isn't shown."""
+    cloud.values[(1, 5)] = reported
+    entry = await _setup(hass)
+    [device] = dr.async_entries_for_config_entry(device_registry, entry.entry_id)
+    assert device.serial_number == shown
