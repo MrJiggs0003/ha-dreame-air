@@ -1,6 +1,6 @@
 [project]
 name = "ha-dreame-air"
-version = "0.1.5"
+version = "0.1.6"
 description = "Home Assistant integration for Dreame air purifiers"
 requires-python = ">=3.13"
 

@@ -10,5 +10,5 @@
   "issue_tracker": "https://github.com/MrJiggs0003/ha-dreame-air/issues",
   "loggers": ["custom_components.dreame_air"],
   "requirements": [],
-  "version": "0.1.5"
+  "version": "0.1.6"
 }

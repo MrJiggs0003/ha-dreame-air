@@ -20,7 +20,7 @@ It works through Dreame's cloud, the same way the app does, so it needs an inter
 | TP20 | `dreame.airp.u2630` | Untested | Speed, modes, PM2.5, air quality, filter, child lock, off timer. **No power control** (see below) |
 | AirPursue PM20 | `dreame.airp.u2402` | Sensors only | PM2.5, PM10, PM1, TVOC, temperature, humidity, air quality, mode, fan speed, filters. **No controls** |
 
-"Untested" profiles come from other owners' published findings and haven't been tried by this project. If you have one, please [report](../../issues) what works and what doesn't.
+"Untested" profiles come from other owners' published findings and haven't been tried by this project. If you have one, please [report](https://github.com/MrJiggs0003/ha-dreame-air/issues) what works and what doesn't.
 
 Other Dreame purifiers can be added (no entities are created for them in the meantime). Dreame robot vacuums aren't covered; use [Tasshack/dreame-vacuum](https://github.com/Tasshack/dreame-vacuum) for those.
 
@@ -127,7 +127,7 @@ automation:
 - **Entities are unavailable:** check that the purifier works in the Dreamehome app. If the app can't reach it either, the problem is the purifier's Wi-Fi or Dreame's cloud, and Home Assistant recovers by itself once it's back.
 - **"The purifier is in standby and can't be turned on remotely":** it was switched off with its own button or the app. Turn it on there; on the FP10 and TP20 Home Assistant deliberately won't (see above).
 - **A sensor shows nothing after a reset or re-pair:** some purifiers report nothing for a sensor for up to about an hour afterwards.
-- **A reading doesn't match the app:** please [open a bug report](../../issues/new/choose) with both values.
+- **A reading doesn't match the app:** please [open a bug report](https://github.com/MrJiggs0003/ha-dreame-air/issues/new/choose) with both values.
 - **An "… isn't supported yet" repair notice:** see [Adding a model](#adding-a-model).
 
 To see what the integration is doing, add this to `configuration.yaml` and restart:
@@ -142,11 +142,11 @@ When opening an issue, attach the diagnostics (Settings → Devices & services �
 
 ## Adding a model
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). In short: each model is one small profile file, mapped carefully on a real unit.
+See [CONTRIBUTING.md](https://github.com/MrJiggs0003/ha-dreame-air/blob/main/CONTRIBUTING.md). In short: each model is one small profile file, mapped carefully on a real unit.
 
 ## Changes and security
 
-What changed in each version is in [CHANGELOG.md](CHANGELOG.md). Please report security problems privately, as described in [SECURITY.md](SECURITY.md).
+What changed in each version is in [CHANGELOG.md](https://github.com/MrJiggs0003/ha-dreame-air/blob/main/CHANGELOG.md). Please report security problems privately, as described in [SECURITY.md](https://github.com/MrJiggs0003/ha-dreame-air/blob/main/SECURITY.md).
 
 ## Credits
 
@@ -155,4 +155,4 @@ What changed in each version is in [CHANGELOG.md](CHANGELOG.md). Please report s
 - [CyberoniOntoni/dreame-TP20-integration](https://github.com/CyberoniOntoni/dreame-TP20-integration): the PM10 and TP20 property maps, and the TP20 hazards.
 - [osmnnl/dreame-pm20](https://github.com/osmnnl/dreame-pm20) (MIT): the PM20 property map.
 
-No code was copied from projects without a license; only the factual property and command numbers were used, with thanks. License notices for the MIT projects are in [NOTICE](NOTICE).
+No code was copied from projects without a license; only the factual property and command numbers were used, with thanks. License notices for the MIT projects are in [NOTICE](https://github.com/MrJiggs0003/ha-dreame-air/blob/main/NOTICE).

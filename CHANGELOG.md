@@ -2,7 +2,11 @@
 
 ## Unreleased
 
-- README: a screenshot of the fan control.
+## 0.1.6
+
+No changes to how the integration works.
+
+- README: a screenshot of the fan control, and links that also work on the HACS page.
 
 ## 0.1.5
 
