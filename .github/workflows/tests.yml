@@ -3,6 +3,9 @@ name: Tests
 on:
   push:
   pull_request:
+  schedule:
+    # Weekly, to catch a new Home Assistant release breaking the integration.
+    - cron: "0 6 * * 1"
   workflow_dispatch:
   workflow_call:
 
@@ -18,4 +21,14 @@ jobs:
       - run: uv venv --python 3.14 .venv
       - run: uv pip install -r requirements_dev.txt
       - run: scripts/lint --check
+      - run: scripts/test
+
+  pytest-minimum:
+    name: pytest (oldest supported Home Assistant)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+      - run: uv venv --python 3.13 .venv
+      - run: uv pip install -r requirements_min.txt
       - run: scripts/test

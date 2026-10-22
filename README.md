@@ -28,6 +28,8 @@ That's also why unknown models get a notice instead of entities: guessing isn't 
 
 ## Installation
 
+Requires Home Assistant 2025.4 or later.
+
 [![Open your Home Assistant instance and open this repository in HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=MrJiggs0003&repository=ha-dreame-air&category=integration)
 
 Or add it by hand:

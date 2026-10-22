@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 0.1.4
+
+- Requires Home Assistant 2025.4 or later. Earlier versions were listed as supported but couldn't load the integration (2025.2), or can't be tested (2025.3).
+- The tests now also run against Home Assistant 2025.4, and weekly against the latest release.
+
 ## 0.1.3
 
 - The integration has its own icon, shown in Home Assistant 2026.3 and later.

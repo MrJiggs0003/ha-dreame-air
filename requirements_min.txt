@@ -1,0 +1,5 @@
+# The oldest Home Assistant this integration supports, matching "homeassistant"
+# in hacs.json: 0.13.232 is the test package for Home Assistant 2025.4.0.
+# (2025.2 lacks AddConfigEntryEntitiesCallback; 2025.3 can't be installed for
+# testing because its aiohttp release was yanked.)
+pytest-homeassistant-custom-component==0.13.232

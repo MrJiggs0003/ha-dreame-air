@@ -11,6 +11,8 @@ from homeassistant.components.fan import (
     SERVICE_TURN_OFF,
     SERVICE_TURN_ON,
 )
+from homeassistant.components.number import NumberDeviceClass
+from homeassistant.components.number.const import UNIT_CONVERTERS
 from homeassistant.config_entries import ConfigEntryState
 from homeassistant.const import ATTR_ENTITY_ID, STATE_OFF, STATE_ON
 from homeassistant.core import HomeAssistant
@@ -168,6 +170,10 @@ async def test_value_missing_from_one_poll_is_kept(hass: HomeAssistant, cloud: F
     assert hass.states.get(pm25).state == "3"
 
 
+@pytest.mark.skipif(
+    NumberDeviceClass.DURATION not in UNIT_CONVERTERS,
+    reason="This Home Assistant version can't show a number's duration in another unit",
+)
 async def test_off_timer_in_minutes(hass: HomeAssistant, cloud: FakeCloud, entity_registry: er.EntityRegistry) -> None:
     """Home Assistant converts the timer when someone chooses another unit."""
     cloud.values[(6, 8)] = 2
