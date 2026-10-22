@@ -6,6 +6,8 @@ It works through Dreame's cloud, the same way the app does, so it needs an inter
 
 > Unofficial. Not affiliated with or endorsed by Dreame.
 
+![A Dreame FP10 in Home Assistant: fan control, air quality, PM2.5, TVOC, temperature, humidity and filter sensors, and display, key beep, off timer and filter reset settings](https://raw.githubusercontent.com/MrJiggs0003/ha-dreame-air/main/docs/screenshot.png)
+
 ## Supported models
 
 | Model | Model ID | Status | What you get |

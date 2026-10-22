@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- README: a screenshot of the FP10 in Home Assistant.
+
 ## 0.1.4
 
 - Requires Home Assistant 2025.4 or later. Earlier versions were listed as supported but couldn't load the integration (2025.2), or can't be tested (2025.3).
