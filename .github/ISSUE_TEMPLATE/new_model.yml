@@ -1,6 +1,6 @@
 name: Support a new model
 description: Ask for a Dreame purifier that isn't supported yet, or report results for an untested one
-labels: [new-model]
+labels: [new model]
 body:
   - type: markdown
     attributes:
