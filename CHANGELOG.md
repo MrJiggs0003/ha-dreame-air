@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.1.3
+
+- The integration has its own icon, shown in Home Assistant 2026.3 and later.
+
 ## 0.1.2
 
 - Fixed: the off timer now shows the right value when you display it in another unit, such as minutes. It showed the number of hours with the new unit.
