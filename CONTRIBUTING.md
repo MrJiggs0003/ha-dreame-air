@@ -1,8 +1,12 @@
-# Adding or fixing a model
+# Contributing
+
+Thanks for helping. Everyone taking part is expected to follow the [code of conduct](CODE_OF_CONDUCT.md).
+
+## Adding or fixing a model
 
 Each purifier model is one file in `custom_components/dreame_air/profiles/`. A profile is plain data: which properties exist, which values may be written, which actions may run, and which ones are unsafe. The device layer refuses everything else, so a mistake in one profile can't affect another model.
 
-## Mapping a new model safely
+### Mapping a new model safely
 
 Reading the wrong property can crash some models (the TP20 reboots when 3/10 is read). So:
 
@@ -13,7 +17,7 @@ Reading the wrong property can crash some models (the TP20 reboots when 3/10 is 
 4. Don't write anything until you know what it does. Add a write to the profile only after confirming it on your unit, with the exact allowed values.
 5. Note in the profile's docstring how each part was confirmed.
 
-## Profile checklist
+### Profile checklist
 
 - `status`: `community` until it's been tested end to end on a real unit, or `read_only` if nothing has been written.
 - `power_action`: the action that toggles power, or `None` if there's no confirmed safe one.
