@@ -27,7 +27,7 @@ try:
     _UG = UnitOfDensity.MICROGRAMS_PER_CUBIC_METER
     _MG = UnitOfDensity.MILLIGRAMS_PER_CUBIC_METER
 except ImportError:  # Home Assistant before UnitOfDensity existed
-    from homeassistant.const import (
+    from homeassistant.const import (  # type: ignore[no-redef]
         CONCENTRATION_MICROGRAMS_PER_CUBIC_METER as _UG,
         CONCENTRATION_MILLIGRAMS_PER_CUBIC_METER as _MG,
     )
@@ -148,7 +148,7 @@ class DreameAirSensor(DreameAirEntity, SensorEntity):
 
     @property
     def native_value(self) -> str | int | float | None:
-        value = self.value
+        value = self.raw_value
         if self._options is not None:
             return self._options.get(value)
         return value if isinstance(value, (int, float)) else None

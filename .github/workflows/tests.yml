@@ -4,6 +4,7 @@ on:
   push:
   pull_request:
   workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: read
@@ -14,8 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: astral-sh/setup-uv@v7
-      - run: uv venv --python 3.14
-      - run: uv pip install pytest-homeassistant-custom-component ruff
-      - run: uv run --no-project ruff check .
-      - run: uv run --no-project ruff format --check .
-      - run: uv run --no-project pytest -q
+      - run: uv venv --python 3.14 .venv
+      - run: uv pip install -r requirements_dev.txt
+      - run: scripts/lint --check
+      - run: scripts/test

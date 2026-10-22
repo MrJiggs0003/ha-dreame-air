@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Run a test Home Assistant with this integration at http://localhost:8123.
+# Its settings live in config/ (only configuration.yaml is committed).
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+mkdir -p config/custom_components
+ln -sfn ../../custom_components/dreame_air config/custom_components/dreame_air
+exec .venv/bin/hass --config config --debug

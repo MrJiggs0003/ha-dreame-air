@@ -1,0 +1,12 @@
+# Test instance for scripts/develop. Not for a real home.
+# frontend brings the UI, config flows, diagnostics and repairs; Home Assistant
+# loads its other built-in basics regardless.
+frontend:
+config:
+history:
+logbook:
+
+logger:
+  default: info
+  logs:
+    custom_components.dreame_air: debug

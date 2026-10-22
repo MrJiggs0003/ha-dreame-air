@@ -69,7 +69,8 @@ class DreameAirFan(DreameAirEntity, FanEntity):
     def preset_mode(self) -> str | None:
         if not self.is_on:
             return None
-        return self.profile.modes.get(self.data.get("mode"))
+        mode = self.data.get("mode")
+        return self.profile.modes.get(mode) if isinstance(mode, int) else None
 
     def _mode_for(self, preset_mode: str) -> int:
         return next(value for value, name in self.profile.modes.items() if name == preset_mode)

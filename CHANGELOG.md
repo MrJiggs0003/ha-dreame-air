@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 0.1.2
+
+- Fixed: the off timer now shows the right value when you display it in another unit, such as minutes. It showed the number of hours with the new unit.
+- For developers: a dev container, `scripts/` for setup, tests, linting and a test Home Assistant, type checking in CI, and automated releases from version tags. See CONTRIBUTING.md.
+
 ## 0.1.1
 
 No changes to how the integration works.

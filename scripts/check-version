@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Check that manifest.json, pyproject.toml and CHANGELOG.md agree on the version,
+# and, given a tag such as v0.1.2, that it matches too.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+manifest=$(python3 -c 'import json; print(json.load(open("custom_components/dreame_air/manifest.json"))["version"])')
+project=$(sed -n 's/^version = "\(.*\)"$/\1/p' pyproject.toml)
+status=0
+
+if [[ "$manifest" != "$project" ]]; then
+    echo "manifest.json says $manifest but pyproject.toml says $project" >&2
+    status=1
+fi
+if ! grep -qx "## $manifest" CHANGELOG.md; then
+    echo "CHANGELOG.md has no \"## $manifest\" section" >&2
+    status=1
+fi
+if [[ $# -gt 0 && "$1" != "v$manifest" ]]; then
+    echo "Tag $1 doesn't match version $manifest (expected v$manifest)" >&2
+    status=1
+fi
+[[ $status -eq 0 ]] && echo "Version $manifest"
+exit $status

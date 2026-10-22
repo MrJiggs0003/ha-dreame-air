@@ -166,3 +166,15 @@ async def test_value_missing_from_one_poll_is_kept(hass: HomeAssistant, cloud: F
     await coordinator.async_refresh()
     await hass.async_block_till_done()
     assert hass.states.get(pm25).state == "3"
+
+
+async def test_off_timer_in_minutes(hass: HomeAssistant, cloud: FakeCloud, entity_registry: er.EntityRegistry) -> None:
+    """Home Assistant converts the timer when someone chooses another unit."""
+    cloud.values[(6, 8)] = 2
+    await _setup(hass)
+    timer = "number.bedroom_purifier_off_timer"
+    entity_registry.async_update_entity_options(timer, "number", {"unit_of_measurement": "min"})
+    await hass.async_block_till_done()
+    state = hass.states.get(timer)
+    assert state.attributes["unit_of_measurement"] == "min"
+    assert float(state.state) == 120

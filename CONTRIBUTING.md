@@ -24,9 +24,31 @@ Reading the wrong property can crash some models (the TP20 reboots when 3/10 is 
 
 ## Development
 
+The easiest way is the dev container: open the repository in VS Code with the Dev Containers extension (or in GitHub Codespaces) and choose **Reopen in Container**. It sets everything up.
+
+To set up by hand instead, you need Python 3.14 and Linux or macOS:
+
 ```
-uv venv --python 3.14
-uv pip install pytest-homeassistant-custom-component ruff
-pytest
-ruff check . && ruff format --check .
+scripts/setup     # creates .venv with Home Assistant, pytest, ruff and mypy
 ```
+
+Then:
+
+| Command | What it does |
+|---|---|
+| `scripts/test` | Runs the tests. Extra arguments go to pytest, for example `scripts/test -k fan` |
+| `scripts/lint` | Formats, lints and type-checks. `--check` changes nothing, as in CI |
+| `scripts/develop` | Starts a test Home Assistant with this integration at http://localhost:8123. Its data stays in `config/` |
+
+The tests use a fake Dreame cloud (`tests/conftest.py`) that records every command, so they never touch a real purifier. To test against your own purifier, add it in the `scripts/develop` instance, which is separate from your real Home Assistant.
+
+## Releasing
+
+For maintainers:
+
+1. Move the **Unreleased** notes in CHANGELOG.md under a new `## X.Y.Z` heading.
+2. Set the same version in `custom_components/dreame_air/manifest.json` and `pyproject.toml`. `scripts/check-version` confirms they all agree.
+3. Commit, push, and wait for the checks to pass.
+4. Tag and push: `git tag vX.Y.Z && git push origin vX.Y.Z`.
+
+The Release workflow runs the tests again, checks that the tag matches the version, and publishes a GitHub release with the changelog section as its notes. HACS then offers the update.

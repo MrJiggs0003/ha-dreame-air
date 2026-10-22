@@ -39,7 +39,7 @@ class DreameAirSwitch(DreameAirEntity, SwitchEntity):
 
     @property
     def is_on(self) -> bool:
-        return bool(self.value)
+        return bool(self.raw_value)
 
     async def async_turn_on(self, **kwargs: Any) -> None:
         await self.coordinator.async_write(self._key, 1)

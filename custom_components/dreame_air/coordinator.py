@@ -8,7 +8,7 @@ import logging
 from typing import Any
 
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.core import HomeAssistant
+from homeassistant.core import CALLBACK_TYPE, HomeAssistant
 from homeassistant.exceptions import ConfigEntryAuthFailed, HomeAssistantError
 from homeassistant.helpers.event import async_call_later
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
@@ -36,7 +36,7 @@ class DreameAirCoordinator(DataUpdateCoordinator[dict[str, Any]]):
             update_interval=timedelta(seconds=entry.options.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL)),
         )
         self.device = device
-        self._cancel_refresh = None
+        self._cancel_refresh: CALLBACK_TYPE | None = None
         self._misses: dict[str, int] = {}
 
     async def _async_update_data(self) -> dict[str, Any]:

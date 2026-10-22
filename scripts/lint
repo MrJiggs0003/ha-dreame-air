@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Format, lint and type-check, the same as CI. Use --check to change nothing.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+if [[ "${1:-}" == "--check" ]]; then
+    .venv/bin/ruff format --check .
+    .venv/bin/ruff check .
+else
+    .venv/bin/ruff format .
+    .venv/bin/ruff check --fix .
+fi
+.venv/bin/mypy custom_components/dreame_air
+scripts/check-version

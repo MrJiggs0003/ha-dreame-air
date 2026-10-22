@@ -55,7 +55,8 @@ class DreameAirEntity(CoordinatorEntity[DreameAirCoordinator]):
         return self.coordinator.data or {}
 
     @property
-    def value(self) -> Any:
+    def raw_value(self) -> Any:
+        # Not "value": NumberEntity.value is final and converts units.
         return self.data.get(self._key)
 
     @property

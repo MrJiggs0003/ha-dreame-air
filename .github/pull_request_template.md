@@ -4,8 +4,8 @@
 
 ## Checklist
 
-- [ ] `pytest` passes
-- [ ] `ruff check . && ruff format --check .` passes
+- [ ] `scripts/test` passes
+- [ ] `scripts/lint --check` passes (ruff, mypy and the version check)
 - [ ] CHANGELOG.md has an entry under **Unreleased**
 
 ### If this adds or changes a model profile

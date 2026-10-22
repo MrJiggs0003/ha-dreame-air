@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Create .venv with Home Assistant and the development tools.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+python3 -m uv --version >/dev/null 2>&1 || python3 -m pip install --user --quiet uv
+python3 -m uv venv --python 3.14 --allow-existing .venv
+python3 -m uv pip install --python .venv/bin/python -r requirements_dev.txt

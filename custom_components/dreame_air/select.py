@@ -43,7 +43,7 @@ class DreameAirSelect(DreameAirEntity, SelectEntity):
 
     @property
     def current_option(self) -> str | None:
-        return self._values.get(self.value)  # type: ignore[union-attr]
+        return self._values.get(self.raw_value)  # type: ignore[union-attr]
 
     async def async_select_option(self, option: str) -> None:
         value = next(v for v, name in self._values.items() if name == option)  # type: ignore[union-attr]

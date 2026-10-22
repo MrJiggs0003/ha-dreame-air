@@ -40,7 +40,8 @@ class DreameAirOffTimer(DreameAirEntity, NumberEntity):
 
     @property
     def native_value(self) -> float | None:
-        return self.value if isinstance(self.value, (int, float)) else None
+        value = self.raw_value
+        return value if isinstance(value, (int, float)) else None
 
     async def async_set_native_value(self, value: float) -> None:
         await self.coordinator.async_write(self._key, int(value))

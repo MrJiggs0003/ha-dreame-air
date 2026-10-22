@@ -1,0 +1,29 @@
+{
+  "name": "Dreame Air",
+  "image": "mcr.microsoft.com/devcontainers/python:3.14",
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg libturbojpeg0 && scripts/setup",
+  "forwardPorts": [8123],
+  "portsAttributes": {
+    "8123": { "label": "Home Assistant", "onAutoForward": "notify" }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "charliermarsh.ruff",
+        "ms-python.python",
+        "ms-python.mypy-type-checker",
+        "redhat.vscode-yaml",
+        "github.vscode-github-actions"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.venv/bin/python",
+        "python.testing.pytestEnabled": true,
+        "mypy-type-checker.importStrategy": "fromEnvironment",
+        "[python]": {
+          "editor.defaultFormatter": "charliermarsh.ruff",
+          "editor.formatOnSave": true
+        }
+      }
+    }
+  }
+}

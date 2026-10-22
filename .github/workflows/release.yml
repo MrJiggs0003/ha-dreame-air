@@ -1,0 +1,31 @@
+name: Release
+
+# Push a tag such as v0.1.2 to publish that version. CHANGELOG.md's section for
+# the version becomes the release notes.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    uses: ./.github/workflows/tests.yml
+
+  release:
+    needs: tests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - run: scripts/check-version "$GITHUB_REF_NAME"
+      - name: Release notes from CHANGELOG.md
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          awk -v heading="## $version" '$0 == heading { found = 1; next } /^## / && found { exit } found' CHANGELOG.md > notes.md
+          grep -q . notes.md || { echo "CHANGELOG.md's $version section is empty" >&2; exit 1; }
+      - run: gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --notes-file notes.md --verify-tag
+        env:
+          GH_TOKEN: ${{ github.token }}

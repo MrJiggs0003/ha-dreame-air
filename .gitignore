@@ -1,5 +1,9 @@
 __pycache__/
 *.pyc
-.venv/
+.venv
 .pytest_cache/
 .ruff_cache/
+.mypy_cache/
+# scripts/develop's test Home Assistant
+config/*
+!config/configuration.yaml

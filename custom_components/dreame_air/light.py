@@ -52,13 +52,13 @@ class DreameAirDisplayLight(DreameAirEntity, LightEntity):
 
     @property
     def is_on(self) -> bool:
-        return bool(self.value)
+        return bool(self.raw_value)
 
     @property
     def brightness(self) -> int | None:
-        if not self.value:
+        if not self.raw_value:
             return None
-        return min(255, round(int(self.value) * 255 / self._max))
+        return min(255, round(int(self.raw_value) * 255 / self._max))
 
     @property
     def effect(self) -> str | None:
@@ -78,6 +78,6 @@ class DreameAirDisplayLight(DreameAirEntity, LightEntity):
         await self.coordinator.async_write("display_brightness", level)
 
     async def async_turn_off(self, **kwargs: Any) -> None:
-        if self.value:
-            self._last_on = int(self.value)
+        if self.raw_value:
+            self._last_on = int(self.raw_value)
         await self.coordinator.async_write("display_brightness", 0)

@@ -1,6 +1,6 @@
 [project]
 name = "ha-dreame-air"
-version = "0.1.1"
+version = "0.1.2"
 description = "Home Assistant integration for Dreame air purifiers"
 requires-python = ">=3.13"
 
@@ -21,3 +21,15 @@ ignore = ["E501", "RUF012"]
 force-sort-within-sections = true
 combine-as-imports = true
 known-first-party = ["custom_components.dreame_air"]
+
+[tool.mypy]
+python_version = "3.13"
+ignore_missing_imports = true
+check_untyped_defs = true
+warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+# Home Assistant aliases voluptuous to probatio at runtime, but mypy sees the
+# real voluptuous types. Importing probatio would drop older Home Assistant.
+module = "custom_components.dreame_air.config_flow"
+disable_error_code = ["arg-type"]
