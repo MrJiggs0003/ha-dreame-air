@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- README: Dreame Air is now in the default HACS store, so the install steps no longer add a custom repository.
+- For developers: the dev container includes the GitHub CLI and keeps Claude Code's settings across rebuilds.
+
 ## 0.1.6
 
 No changes to how the integration works.

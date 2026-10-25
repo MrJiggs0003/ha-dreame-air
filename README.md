@@ -38,10 +38,9 @@ Requires Home Assistant 2025.4 or later.
 
 Or add it by hand:
 
-1. In HACS, open the ⋮ menu → **Custom repositories**, add this repository's URL, and choose **Integration**.
-2. Search for **Dreame Air**, download it, and restart Home Assistant.
-3. Go to **Settings → Devices & services → Add integration → Dreame Air**.
-4. Sign in with your Dreamehome email and password, choose your region, and pick the purifier.
+1. In HACS, search for **Dreame Air**, download it, and restart Home Assistant.
+2. Go to **Settings → Devices & services → Add integration → Dreame Air**.
+3. Sign in with your Dreamehome email and password, choose your region, and pick the purifier.
 
 ### Signed up with Google or Apple?
 
