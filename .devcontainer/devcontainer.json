@@ -2,12 +2,13 @@
   "name": "Dreame Air",
   "image": "mcr.microsoft.com/devcontainers/python:3.14",
   "features": {
-    "ghcr.io/devcontainers/features/github-cli:1": {}
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1": {}
   },
   "mounts": [
     "source=claude-code-config-${devcontainerId},target=/home/vscode/.claude,type=volume"
   ],
-  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg libturbojpeg0 && scripts/setup",
+  "postCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.claude && sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg libturbojpeg0 && scripts/setup",
   "forwardPorts": [8123],
   "portsAttributes": {
     "8123": { "label": "Home Assistant", "onAutoForward": "notify" }
