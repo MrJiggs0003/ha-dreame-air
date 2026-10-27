@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import hashlib
+from pathlib import Path
+import re
 
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
@@ -74,3 +76,16 @@ async def test_rejected_write(hass: HomeAssistant, aioclient_mock: AiohttpClient
     aioclient_mock.post(CMD_URL, json={"code": 0, "data": {"result": [{"siid": 2, "piid": 1, "code": -4002}]}})
     with pytest.raises(CommandFailed):
         await _cloud(hass).set_property("1", HOST, 2, 1, 1)
+
+
+@pytest.mark.parametrize(
+    ("path", "url"),
+    [
+        ("custom_components/dreame_air/api.py", "https://{self._region}.iot.dreame.tech:13267"),
+        ("tools/probe.py", "https://{args.region}.iot.dreame.tech:13267"),
+    ],
+)
+def test_only_dreame_cloud_hosts(path: str, url: str) -> None:
+    # Credentials go to these URLs; any other host must be a deliberate, reviewed change.
+    source = (Path(__file__).parent.parent / path).read_text(encoding="utf-8")
+    assert re.findall(r"\w+://[^\s\"']+", source) == [url]

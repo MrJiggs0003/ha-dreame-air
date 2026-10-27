@@ -25,6 +25,13 @@ Reading the wrong property can crash some models (the TP20 reboots when 3/10 is 
 - `unsafe_reads` / `unsafe_actions`: anything known to crash it.
 - Add the profile to `all_profiles()` in `profiles/__init__.py`.
 - Add a test in `tests/test_device.py` for anything unusual, especially hazards.
+- Add the model to `SURFACE` in `tests/test_profiles.py`: every write (with its allowed values), action and hazard it has. The test fails until the table matches the profile, so any change to what reaches a purifier shows up in review.
+
+### Reviewing outside contributions
+
+- A new model from the community starts as `read_only`: sensors only, no writes or actions. Writes come later, one at a time, once the contributor's readings match what their app shows.
+- Read changes to `SURFACE`, `.github/`, `api.py`, `tools/` and the `requirements` in `manifest.json` line by line. Those decide what's sent to purifiers, where credentials go and what CI runs.
+- Workflow actions are pinned to commit SHAs. Dependabot updates them; check the release notes before merging its PRs.
 
 ## Development
 
