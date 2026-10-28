@@ -3,6 +3,7 @@
 ## Unreleased
 
 - README: Dreame Air is now in the default HACS store, so the install steps no longer add a custom repository.
+- `tools/probe.py` no longer crashes when a read times out; it shows the cloud's reply instead.
 - Development: CI actions are pinned to commits, and the tests now check every write and action each model can be sent, and that credentials only go to Dreame's cloud.
 
 ## 0.1.6
