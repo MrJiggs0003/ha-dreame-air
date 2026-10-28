@@ -103,7 +103,8 @@ def main() -> None:
             "data": {"did": args.did, "id": 1, "method": "get_properties", "params": params},
         }
         result = post(f"{base}/dreame-iot-com{prefix}/device/sendCommand", headers, json.dumps(payload).encode())
-        print(f"  {siid}/{piid}: {json.dumps(result.get('data', {}).get('result', result))}")
+        # A timeout comes back with "data": null, so show the whole reply.
+        print(f"  {siid}/{piid}: {json.dumps((result.get('data') or {}).get('result', result))}")
 
 
 if __name__ == "__main__":
